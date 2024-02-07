@@ -15,7 +15,9 @@
 
 <template>
   <div class="h-screen bg-gray-900">
-    <UContainer class="sm:grid sm:grid-cols-3 gap-4">
+    <UContainer
+      class="sm:grid sm:grid-cols-3 sm:gap-4 sm:flex-none sm:space-y-0 flex flex-col space-y-4"
+    >
       <PostCard
         v-if="posts && posts.length !== 0"
         @deleted="getData"

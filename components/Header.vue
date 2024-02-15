@@ -16,14 +16,19 @@
 <template>
   <div>
     <header class="bg-gray-900">
-      <div class="container mx-auto flex justify-between p-5 items-center">
+      <div class="mx-auto flex justify-between p-5 items-center">
         <NuxtLink
           to="/"
-          class="flex title-font font-medium items-center text-white text-2xl"
+          class="text-gray-900 dark:text-white text-4xl md:text-6xl font-extrabold"
         >
           E-HVAC
         </NuxtLink>
-        <UButton @click="isOpen = true" label="Navigasyon" variant="outline" />
+        <UButton
+          @click="isOpen = true"
+          label="Navigasyon"
+          variant="outline"
+          size="xl"
+        />
       </div>
     </header>
 

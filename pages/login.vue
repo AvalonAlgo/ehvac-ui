@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  definePageMeta({
+    middleware: ["loginregister-middleware"],
+  });
+
   import Joi from "joi";
   import type { FormSubmitEvent } from "#ui/types";
 

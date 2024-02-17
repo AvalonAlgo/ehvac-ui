@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  definePageMeta({
+    middleware: ["loginregister-middleware"],
+  });
+
   import Joi from "joi";
   import type { FormSubmitEvent } from "#ui/types";
 
@@ -22,10 +26,14 @@
     confirm: undefined,
   });
 
+  const isModalOpen = ref(false);
+  const registerSuccess = ref(false);
+  const passwordError = ref(false);
+
   async function onSubmit(event: FormSubmitEvent<any>) {
-    // Do something with event.data
+    isModalOpen.value = true;
     if (state.password !== state.confirm_password) {
-      console.log("error");
+      passwordError.value = true;
       return;
     }
 
@@ -41,12 +49,47 @@
         emailRedirectTo: "http://localhost:3000/login",
       },
     });
+
+    if (!error) {
+      registerSuccess.value = true;
+      setTimeout(() => {
+        navigateTo("/confirm");
+      }, 5000);
+    }
   }
 </script>
 
 <template>
+  <UModal v-model="isModalOpen">
+    <div class="p-4 space-y-4">
+      <UProgress v-if="!registerSuccess && !passwordError" animation="swing" />
+      <UProgress
+        v-if="!registerSuccess && passwordError"
+        :value="100"
+        color="red"
+      />
+      <UProgress v-if="registerSuccess" :value="100" color="emerald" />
+      <UButton
+        v-if="!registerSuccess && passwordError"
+        label="Passwords do not match!"
+        color="red"
+        variant="soft"
+        block
+        @click="isModalOpen = false"
+      />
+      <UButton
+        v-if="registerSuccess"
+        label="Success! Do not close the browser..."
+        color="emerald"
+        variant="soft"
+        block
+      />
+    </div>
+  </UModal>
+
   <div class="flex justify-center m-auto h-screen bg-gray-900">
-    <UContainer class="mx-auto w-4/5 sm:w-2/3 my-auto">
+    <UContainer class="mx-auto w-4/5 sm:w-2/3 mt-20">
+      <h2 class="text-center mb-4 text-3xl sm:text-4xl font-bold">Hesap Ac</h2>
       <UForm
         :schema="schema"
         :state="state"
@@ -64,7 +107,7 @@
         <UFormGroup label="Hesap Turu" name="account_type">
           <USelect
             v-model="state.account_type"
-            :options="['Hizmet Alan', 'Hizmet Veren', 'Tedarikci']"
+            :options="['Customer', 'Service', 'Supplier']"
           />
         </UFormGroup>
 
@@ -83,7 +126,23 @@
           />
         </UFormGroup>
 
-        <UButton type="submit" block variant="soft" color="cyan">
+        <UButton
+          v-if="!state.confirm"
+          type="submit"
+          block
+          variant="soft"
+          color="cyan"
+          disabled
+        >
+          Hesap ac
+        </UButton>
+        <UButton
+          v-else-if="state.confirm"
+          type="submit"
+          block
+          variant="soft"
+          color="cyan"
+        >
           Hesap ac
         </UButton>
       </UForm>

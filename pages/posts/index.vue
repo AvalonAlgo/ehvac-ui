@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  definePageMeta({
+    middleware: ["post-middleware"],
+  });
   const client = useSupabaseClient();
   const user = useSupabaseUser();
 

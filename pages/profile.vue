@@ -54,9 +54,14 @@
     }
   };
 
-  const closeModal = () => {
+  const closeModal = async () => {
     isModalOpen.value = false;
-    location.reload();
+    const { data: avatarUrl, error } = await client
+      .from("profiles")
+      .select("avatar_url")
+      .eq("id", user.value?.id)
+      .single();
+    avatarUrlRef.value = avatarUrl?.avatar_url;
   };
 
   onMounted(async () => {
@@ -73,7 +78,7 @@
   <UModal v-model="isModalOpen">
     <div class="p-4 space-y-4">
       <UProgress v-if="!success" animation="carousel" />
-      <UProgress v-else :value="100" />
+      <UProgress v-else :value="100" color="emerald" />
       <UButton
         v-if="success === true"
         @click="closeModal"
@@ -91,11 +96,17 @@
         <div
           class="container mx-auto flex flex-col px-5 py-24 justify-center items-center"
         >
-          <img
+          <NuxtImg
             v-if="previewAvatarUrl || avatarUrlRef"
             class="rounded-lg w-72 h-72 object-cover mb-4"
             :src="previewAvatarUrl || avatarUrlRef"
             alt="Avatar preview"
+          />
+          <NuxtImg
+            v-else
+            class="rounded-lg w-72 h-72 object-cover mb-4"
+            src="https://placehold.co/600x400"
+            alt="Empty avatar"
           />
           <div
             class="w-full md:w-2/3 flex flex-col mb-16 items-center text-center"

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  definePageMeta({
+    middleware: ["post-middleware"],
+  });
+
   const client = useSupabaseClient();
   const currentPost = useRoute().params.id;
 
@@ -101,7 +105,7 @@
               to="/posts"
               block
               variant="outline"
-              class="w-2/3 self-center sm:self-start"
+              class="self-center sm:self-start"
             />
           </div>
         </div>

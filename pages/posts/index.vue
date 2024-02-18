@@ -2,6 +2,7 @@
   definePageMeta({
     middleware: ["post-middleware"],
   });
+
   const client = useSupabaseClient();
   const user = useSupabaseUser();
 
@@ -29,8 +30,23 @@
         :post="post"
       />
     </UContainer>
-    <UContainer v-if="posts && posts.length === 0">
+    <UContainer
+      v-if="
+        user?.user_metadata.account_type === 'Customer' &&
+        posts &&
+        posts.length === 0
+      "
+    >
       Ilaniniz yoktur
+    </UContainer>
+    <UContainer
+      v-else-if="
+        user?.user_metadata.account_type !== 'Customer' &&
+        posts &&
+        posts.length === 0
+      "
+    >
+      Henuz ilan yoktur
     </UContainer>
   </div>
 </template>

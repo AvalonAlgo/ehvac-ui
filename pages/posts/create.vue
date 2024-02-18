@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  definePageMeta({
+    middleware: ["post-middleware"],
+  });
+
   import Joi from "joi";
   import type { FormSubmitEvent } from "#ui/types";
 
@@ -207,7 +211,7 @@
   <UModal v-model="isModalOpen">
     <div class="p-4 space-y-4">
       <UProgress v-if="!success" animation="carousel" />
-      <UProgress v-else :value="100" />
+      <UProgress v-else :value="100" color="emerald" />
       <UButton
         v-if="success === false"
         label="Kapat"
@@ -221,6 +225,7 @@
         label="Ilanlarima Don"
         block
         variant="soft"
+        color="emerald"
       />
     </div>
   </UModal>

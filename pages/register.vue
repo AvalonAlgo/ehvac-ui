@@ -31,7 +31,10 @@
   const passwordError = ref(false);
 
   async function onSubmit(event: FormSubmitEvent<any>) {
+    registerSuccess.value = false;
+    passwordError.value = false;
     isModalOpen.value = true;
+
     if (state.password !== state.confirm_password) {
       passwordError.value = true;
       return;

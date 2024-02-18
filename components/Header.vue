@@ -95,6 +95,25 @@
           block
           variant="soft"
         />
+        <UButton
+          v-if="
+            route.name === 'posts' &&
+            user &&
+            user.user_metadata.account_type !== 'Customer'
+          "
+          label="Posts"
+          to="/posts"
+          block
+          variant="soft"
+          color="emerald"
+        />
+        <UButton
+          v-else-if="user && user.user_metadata.account_type !== 'Customer'"
+          label="Posts"
+          to="/posts"
+          block
+          variant="soft"
+        />
 
         <UButton
           v-if="

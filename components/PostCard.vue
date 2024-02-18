@@ -19,9 +19,6 @@
 
     image.value = imageData[0].url;
     images.value = imageData;
-    for (const imageUrl of images.value) {
-      console.log(imageUrl.url);
-    }
   });
 
   const deletePost = async () => {

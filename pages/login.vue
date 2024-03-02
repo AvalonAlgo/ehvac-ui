@@ -33,6 +33,7 @@
 <template>
   <div class="flex justify-center m-auto h-screen bg-gray-900">
     <UContainer class="mx-auto w-4/5 sm:w-2/3 my-auto">
+      <h2 class="text-center mb-4 text-3xl sm:text-4xl font-bold">Oturum Ac</h2>
       <UForm
         :schema="schema"
         :state="state"

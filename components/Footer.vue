@@ -44,10 +44,6 @@
               >KVKK Aydinlatma Metni</NuxtLink
             >
           </li>
-
-          <li>
-            <NuxtLink to="" class="hover:underline">Contact</NuxtLink>
-          </li>
         </ul>
       </div>
     </footer>

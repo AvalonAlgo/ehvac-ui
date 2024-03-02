@@ -122,6 +122,32 @@
         </UFormGroup>
 
         <UFormGroup name="confirm">
+          <div class="flex flex-col space-y-1 mb-3">
+            <UButton
+              external
+              to="/KVKK-AYDINLATMA METNİ.pdf"
+              target="_blank"
+              block
+              variant="soft"
+              >KVKK Aydinlatma Metni</UButton
+            >
+            <UButton
+              external
+              to="/KULLANICI-SÖZLEŞMESİ-(Üyelik Sözleşmesi).pdf"
+              target="_blank"
+              block
+              variant="soft"
+              >Kullanici Sozlesmesi</UButton
+            >
+            <UButton
+              external
+              to="/GİZLİLİK-POLİTİKASI.pdf"
+              target="_blank"
+              block
+              variant="soft"
+              >Gizlilik Politikasi</UButton
+            >
+          </div>
           <UCheckbox
             v-model="state.confirm"
             label="I have read the terms and conditions, and accept them"
@@ -144,7 +170,7 @@
           type="submit"
           block
           variant="soft"
-          color="cyan"
+          color="emerald"
         >
           Hesap ac
         </UButton>
